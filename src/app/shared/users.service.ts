@@ -18,8 +18,6 @@ export class UsersService {
   hobbies: Hobby[];
   foods: Food[];
   genre: Genre[];
-  
-  
 
   constructor(private httpClient: HttpClient) {}
 
@@ -99,5 +97,18 @@ export class UsersService {
         console.log(res);
         console.log(this.hobbies);
       });
+  }
+  bindMostLikedHobby() {
+    this.httpClient
+      .get(environment.apiUrl + '/api/Users/GetMostLikedHobby')
+      .toPromise()
+      .then((res) => {
+        this.hobbies = res as Hobby[];
+        console.log(res);
+        console.log(this.hobbies);
+      });
+  }
+  getmostlikedhobby(){
+    return this.httpClient.get(environment.apiUrl + '/api/users/getmostlikedhobby');
   }
 }
