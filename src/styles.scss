@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+input {
+  border: 0px;
+  border-style: none;
+}
+input:focus {
+  border: 0px;
+  border-style: none;
+}
+* {
+  font-family: Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}

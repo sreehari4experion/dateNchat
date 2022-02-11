@@ -1,0 +1,315 @@
+<style>
+  .main {
+    background-color: #041114;
+    height: 100vh;
+  }
+  .logo {
+    width: 7rem;
+  }
+</style>
+<!-- navbar -->
+<nav class="navbar navbar-expand-lg navbar-light" style="background: #041114">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"
+      ><img class="img-fluid img logo" src="../../assets/logo.png" alt=""
+    /></a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon bg-white"></span>
+    </button>
+    <div
+      class="collapse navbar-collapse justify-content-end"
+      id="navbarNavDropdown"
+    >
+      <ul class="navbar-nav">
+        <li
+          class="nav-item dropdown active"
+          style="display: flex; margin: 0 1rem 0 1rem"
+        >
+          <img
+            class="image-fluid rounded-circle"
+            src="../../assets/logo.png"
+            alt=""
+            style="height: 3rem"
+          />
+          <a
+            class="nav-link dropdown-toggle active text-white"
+            href="#"
+            id="navbarDropdownMenuLink"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Admin
+          </a>
+          <ul
+            class="dropdown-menu bg-dark text-white"
+            aria-labelledby="navbarDropdownMenuLink"
+          >
+            <li>
+              <a class="dropdown-item text-white" href="#">Profile</a>
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                href="#"
+                style="
+                  background-color: #d11f5b;
+                  color: white;
+                  border-radius: 5px;
+                "
+                >Logout</a
+              >
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- end navbar -->
+<div
+  class="colorbar"
+  style="
+    height: 1rem;
+    background: linear-gradient(to right, rgb(209, 41, 83), rgb(255, 174, 0));
+    border-radius: 1.5rem;
+  "
+></div>
+<!-- contents  -->
+
+<!-- templte driven form  -->
+<div class="container main">
+  <h2 class="display-3 text-center my-2 text-white">Add User</h2>
+  <div class="container my-2">
+    <form
+      name="userForm"
+      #form="ngForm"
+      autocomplete="off"
+      (ngSubmit)="onSubmit(form)"
+    >
+      <!-- user id  -->
+      <div class="form-group">
+        <input
+          type="hidden"
+          name="userId"
+          [(ngModel)]="usersService.formData.UserId"
+          class="form-control"
+        />
+      </div>
+      <!-- user name  -->
+      <div class="form-group my-1">
+        <label for="userName" class="text-white">User Name</label>
+        <input
+          type="text"
+          name="userName"
+          [(ngModel)]="usersService.formData.UserName"
+          class="form-control"
+          id="userName"
+          placeholder="Enter User Name"
+          required
+          minlength="3"
+          maxlength="50"
+          #userName="ngModel"
+        />
+      </div>
+      <!-- validations -->
+      <div class="form-group my-1">
+        <div *ngIf="userName.invalid && userName.touched" class="text-danger">
+          <div *ngIf="userName.errors.required">User Name is required</div>
+        </div>
+      </div>
+      <!-- user contact -->
+      <div class="form-group">
+        <label for="userContact" class="text-white">User Contact</label>
+        <input
+          type="number"
+          name="userContact"
+          [(ngModel)]="usersService.formData.Phone"
+          class="form-control"
+          id="userContact"
+          placeholder="Enter User Contact"
+          required
+          minlength="10"
+          maxlength="10"
+          #userContact="ngModel"
+        />
+      </div>
+      <!-- validations -->
+      <div class="form-group">
+        <div
+          *ngIf="userContact.invalid && userContact.touched"
+          class="text-danger"
+        >
+          <div *ngIf="userContact.errors.required">
+            User Contact is required
+          </div>
+        </div>
+      </div>
+      <!-- user password  -->
+      <div class="form-group my-1">
+        <label for="userPassword" class="text-white">User Password</label>
+        <input
+          type="password"
+          name="userPassword"
+          [(ngModel)]="usersService.formData.Password"
+          class="form-control"
+          id="userPassword"
+          placeholder="Enter User Password"
+          required
+          minlength="8"
+          maxlength="20"
+          #userPassword="ngModel"
+        />
+      </div>
+      <!-- validations -->
+      <div class="form-group">
+        <div
+          *ngIf="userPassword.invalid && userPassword.touched"
+          class="text-danger"
+        >
+          <div *ngIf="userPassword.errors.required">
+            User Password is required
+          </div>
+        </div>
+      </div>
+      <!-- occupation  -->
+      <div class="form-group my-1">
+        <label for="occupation" class="text-white">Occupation</label>
+        <input
+          type="text"
+          name="occupation"
+          [(ngModel)]="usersService.formData.Occupation"
+          class="form-control"
+          id="occupation"
+          placeholder="Enter Occupation"
+          required
+          minlength="3"
+          maxlength="50"
+          #occupation="ngModel"
+        />
+      </div>
+      <!-- validations -->
+      <div class="form-group">
+        <div
+          *ngIf="occupation.invalid && occupation.touched"
+          class="text-danger"
+        >
+          <div *ngIf="occupation.errors.required">Occupation is required</div>
+        </div>
+      </div>
+
+      <!-- select MovieGenre -->
+      <div class="form-group my-1">
+        <label for="movieGenre" class="text-white">Movie Genre</label>
+        <select
+          name="movieGenre"
+          [(ngModel)]="usersService.formData.MovieGenre"
+          class="form-control"
+          id="movieGenre"
+          required
+          #movieGenre="ngModel"
+        >
+          <option value="" disabled selected hidden>Select Movie Genre</option>
+          <option
+            *ngFor="let item of usersService.genre"
+            value="{{ item.MovieId }}"
+          >
+            >
+            {{ item.MovieName }}
+          </option>
+        </select>
+      </div>
+      <!-- validations -->
+      <div class="form-group">
+        <div
+          *ngIf="movieGenre.invalid && movieGenre.touched"
+          class="text-danger"
+        >
+          <div *ngIf="movieGenre.errors.required">Movie Genre is required</div>
+        </div>
+      </div>
+
+      <!-- select Hobby -->
+      <div class="form-group my-1">
+        <label for="hobby" class="text-white">Hobby</label>
+        <select
+          name="hobby"
+          [(ngModel)]="usersService.formData.Hobby"
+          class="form-control"
+          id="hobby"
+          required
+          #hobby="ngModel"
+        >
+          <option value="" disabled selected hidden>Select Hobby</option>
+          <option
+            *ngFor="let item of usersService.hobbies"
+            value="{{ item.HobbyId }}"
+          >
+            >
+            {{ item.HobbyName }}
+          </option>
+        </select>
+      </div>
+      <!-- validations -->
+      <div class="form-group">
+        <div *ngIf="hobby.invalid && hobby.touched" class="text-danger">
+          <div *ngIf="hobby.errors.required">Hobby is required</div>
+        </div>
+      </div>
+
+      <!-- select food  -->
+      <div class="form-group my-1">
+        <label for="food" class="text-white">Food</label>
+        <select
+          name="food"
+          [(ngModel)]="usersService.formData.Food"
+          class="form-control"
+          id="food"
+          required
+          #food="ngModel"
+        >
+          <option value="" disabled selected hidden>Select Food</option>
+          <option
+            *ngFor="let item of usersService.foods"
+            value="{{ item.FoodId }}"
+          >
+            >
+            {{ item.FoodName }}
+          </option>
+        </select>
+      </div>
+      <!-- validations -->
+      <div class="form-group">
+        <div *ngIf="food.invalid && food.touched" class="text-danger">
+          <div *ngIf="food.errors.required">Food is required</div>
+        </div>
+      </div>
+
+      <!-- submit  -->
+      <div class="form-group my-3">
+        <button
+          type="submit"
+          class="btn btn-primary form-control"
+          [disabled]="!(form.valid && form.dirty)"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- <div style="width: 50%">
+  <ng-multiselect-dropdown
+    [settings]="dropdownSettings"
+    [data]="foodList"
+  >
+  </ng-multiselect-dropdown>
+</div> -->

@@ -1,0 +1,113 @@
+<style>
+  .main {
+    background-color: #041114;
+    height: 100vh;
+  }
+  .login {
+    background-color: #fc9918;
+  }
+  .login-form {
+    margin-top: 1rem;
+    padding: 3rem;
+    width: 75%;
+  }
+  .login-form {
+    background: linear-gradient(to right, #f05454, #fc9918);
+  }
+  #login,
+  #password {
+    border-radius: 0.8rem;
+    background: #fff;
+  }
+</style>
+
+<!-- login card center  -->
+<!-- login -->
+<div
+  class="container main"
+  id="loginform"
+  style="display: flex; justify-content: center; align-items: center"
+>
+  <div class="card login-form" id="login-form">
+    <h1 class="display-3 text-center p-2 text-light">Login</h1>
+    <div class="loginCard">
+      <!-- form  -->
+      <form [formGroup]="loginForm" (ngSubmit)="loginCredentials()">
+        <!-- user name control  -->
+        <div class="my-3 form-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter Username"
+            name="UserName"
+            formControlName="UserName"
+            class="form-control"
+            minlength="3"
+            required
+            [ngClass]="{
+              'is-invalid':
+                formControls.UserName.invalid && formControls.UserName.touched
+            }"
+          />
+        </div>
+        <div class="validation"></div>
+        <!-- username validations -->
+        <div *ngIf="isSubmitted && formControls.UserName.errors">
+          <div
+            *ngIf="formControls.UserName.errors"
+            style="color: red; text-align: left"
+          >
+            User Name is required !
+          </div>
+        </div>
+        <!-- uPASSWORD control  -->
+        <div class="my-3 form-group">
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Enter Password"
+            name="Password"
+            formControlName="Password"
+            class="form-control"
+            minlength="5"
+            required
+            autocomplete="off"
+            [ngClass]="{
+              'is-invalid':
+                formControls.Password.invalid && formControls.Password.touched
+            }"
+          />
+        </div>
+        <!-- password validations -->
+        <div *ngIf="isSubmitted && formControls.Password.errors">
+          <div
+            *ngIf="formControls.Password.errors"
+            style="color: red; text-align: left"
+          >
+            password is required !
+          </div>
+        </div>
+        <!-- button  -->
+        <!-- center a button  -->
+
+        <div class="my-3 text-center">
+          <button class="btn-primary btn">Login</button>
+        </div>
+        <div *ngIf="error" style="color: red; text-align: left">
+          {{ error }}
+        </div>
+      </form>
+      <!-- end form  -->
+    </div>
+    <div class="row buttons-login p-3">
+      <!-- <button class="btn btn-primary login" id="loginbtn">Login</button> -->
+      <p class="text-center text-light">
+        Dont have an account ?
+        <a style="color: white" id="signupLast" routerLink="/signup">Sign Up</a>
+      </p>
+
+      <!-- <button class="btn btn-primary signup">Sign Up</button> -->
+    </div>
+  </div>
+</div>
+<!-- end login -->

@@ -1,0 +1,103 @@
+<style>
+  .logo {
+    width: 7rem;
+  }
+  .bottombar {
+    /* margin-top: 6.5rem; */
+    height: 0.8rem;
+    background: linear-gradient(to right, #f05454, #fc9918);
+    border-radius: 1rem;
+  }
+  .navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-basis: 1;
+  }
+  .hide {
+    display: none;
+  }
+  .hide2 {
+    display: none;
+  }
+  .love-image {
+    width: 100%;
+    padding: 5rem;
+  }
+  .romance-pic {
+    width: 100%;
+  }
+  .intro-text {
+    /* margin-top: 5rem; */
+    padding: 3rem;
+  }
+  .btn-space {
+    /* margin-top: 5rem; */
+    padding: 2rem;
+  }
+  .btn {
+    margin: 1rem;
+  }
+
+  img {
+    width: 100%;
+  }
+</style>
+
+<nav class="navbar navbar-dark" style="background-color: #041114">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"
+      ><img class="img-fluid img logo" src="../../assets/logo.png" alt=""
+    /></a>
+  </div>
+</nav>
+<div
+  class="colorbar"
+  style="
+    height: 1rem;
+    background: linear-gradient(to right, rgb(209, 41, 83), rgb(255, 174, 0));
+    border-radius: 1.5rem;
+  "
+></div>
+<!-- contents  -->
+<div class="container intro">
+  <div class="row">
+    <h1 class="display-1 text-light intro-text text-center">
+      Find Your True Love
+      <img src="../../assets/4836906.jpg" />
+    </h1>
+  </div>
+  <div class="row"></div>
+  <img class="row img-fluid romance-pic" src="../images/4836906.jpg" alt="" />
+  <div class="row btn-space">
+    <button
+      class="btn btn-primary login p-3 col btn-outline-light"
+      id="loginMain"
+    >
+      <a
+        href="#"
+        routerLink="/login"
+        class="text-light"
+        style="text-decoration: none"
+      >
+        Login
+      </a>
+    </button>
+    <button
+      class="btn btn-primary signup p-3 col btn-outline-light"
+      id="signupMain"
+    >
+      <a
+        href="#"
+        routerLink="/signup"
+        class="text-light"
+        style="text-decoration: none"
+      >
+        Sign Up
+      </a>
+    </button>
+  </div>
+</div>
+
+<!-- end contents -->

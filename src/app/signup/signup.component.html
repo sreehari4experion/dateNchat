@@ -1,0 +1,241 @@
+<style>
+  .main {
+    background-color: #041114;
+    height: 100%;
+  }
+  .signup-form {
+    background: linear-gradient(to right, #f05454, #fc9918);
+  }
+  .card {
+    background-color: #f05454;
+    min-width: 55rem;
+    padding: 5rem;
+    margin: 4rem;
+  }
+</style>
+<div
+  class="main container"
+  id="signupform"
+  style="display: flex; justify-content: center; align-items: center"
+>
+  <div class="card signup-form" id="signup-form">
+    <h1 class="display-3 text-center p-2 text-light">Sign Up</h1>
+    <!-- templte driven from  -->
+    <!-- #form="ngForm" -->
+    <!-- (ngSubmit)="onSubmit(form)" -->
+    <form
+      name="userForm"
+      #form="ngForm"
+      autocomplete="off"
+      (ngSubmit)="onSubmit(form)"
+    >
+      <!-- user id  -->
+      <div class="form-group">
+        <input
+          type="hidden"
+          name="userId"
+          [(ngModel)]="usersService.formData.UserId"
+          class="form-control"
+        />
+      </div>
+      <!-- user name  -->
+      <div class="form-group my-1">
+        <label for="Name" class="text-white">User Name</label>
+        <input
+          type="text"
+          name="Name"
+          [(ngModel)]="usersService.formData.UserName"
+          class="form-control"
+          id="userName"
+          placeholder="Enter User Name"
+          required
+          minlength="3"
+          maxlength="50"
+          #userName="ngModel"
+        />
+      </div>
+      <!-- validations -->
+      <div class="form-group my-1">
+        <div *ngIf="userName.invalid && userName.touched" class="text-danger">
+          <div *ngIf="userName.errors.required">User Name is required</div>
+        </div>
+      </div>
+      <!-- user contact -->
+      <div class="form-group">
+        <label for="userContact" class="text-white">User Contact</label>
+        <input
+          type="number"
+          name="userContact"
+          [(ngModel)]="usersService.formData.Phone"
+          class="form-control"
+          id="userContact"
+          placeholder="Enter User Contact"
+          required
+          minlength="10"
+          maxlength="10"
+          #name="ngModel"
+        />
+      </div>
+      <!-- validations -->
+      <div class="form-group">
+        <div
+          *ngIf="name.invalid && name.touched"
+          class="text-danger"
+        >
+          <div *ngIf="name.errors.required">
+            User Contact is required
+          </div>
+        </div>
+      </div>
+      <!-- user password  -->
+      <div class="form-group my-1">
+        <label for="userPassword" class="text-white">User Password</label>
+        <input
+          type="password"
+          name="userPassword"
+          [(ngModel)]="usersService.formData.Password"
+          class="form-control"
+          id="userPassword"
+          placeholder="Enter User Password"
+          required
+          minlength="8"
+          maxlength="20"
+          #password="ngModel"
+        />
+      </div>
+      <!-- validations -->
+      <div class="form-group">
+        <div
+          *ngIf="password.invalid && password.touched"
+          class="text-danger"
+        >
+          <div *ngIf="password.errors.required">
+            User Password is required
+          </div>
+        </div>
+      </div>
+      <!-- occupation  -->
+      <div class="form-group my-1">
+        <label for="occupation" class="text-white">Occupation</label>
+        <input
+          type="text"
+          name="occupation"
+          [(ngModel)]="usersService.formData.Occupation"
+          class="form-control"
+          id="occupation"
+          placeholder="Enter Occupation"
+          required
+          minlength="3"
+          maxlength="50"
+          #occupation="ngModel"
+        />
+      </div>
+      <!-- validations -->
+      <div class="form-group">
+        <div
+          *ngIf="occupation.invalid && occupation.touched"
+          class="text-danger"
+        >
+          <div *ngIf="occupation.errors.required">Occupation is required</div>
+        </div>
+      </div>
+
+      <!-- select MovieGenre -->
+      <div class="form-group my-1">
+        <label for="movieGenre" class="text-white">Movie Genre</label>
+        <select
+          name="movieGenre"
+          [(ngModel)]="usersService.formData.MovieGenre"
+          class="form-control"
+          id="movieGenre"
+          required
+          #movieGenre="ngModel"
+        >
+          <option value="" disabled selected hidden>Select Movie Genre</option>
+          <option
+            *ngFor="let item of usersService.genre"
+            value="{{ item.MovieId }}"
+          >
+            {{ item.MovieName }}
+          </option>
+        </select>
+      </div>
+      <!-- validations -->
+      <div class="form-group">
+        <div
+          *ngIf="movieGenre.invalid && movieGenre.touched"
+          class="text-danger"
+        >
+          <div *ngIf="movieGenre.errors.required">Movie Genre is required</div>
+        </div>
+      </div>
+
+      <!-- select Hobby -->
+      <div class="form-group my-1">
+        <label for="hobby" class="text-white">Hobby</label>
+        <select
+          name="hobby"
+          [(ngModel)]="usersService.formData.Hobby"
+          class="form-control"
+          id="hobby"
+          required
+          #hobby="ngModel"
+          multiple
+        >
+          <option value="" disabled selected hidden>Select Hobby</option>
+          <option
+            *ngFor="let item of usersService.hobbies"
+            value="{{ item.HobbyId }}"
+          >
+            {{ item.HobbyName }}
+          </option>
+        </select>
+      </div>
+      <!-- validations -->
+      <div class="form-group">
+        <div *ngIf="hobby.invalid && hobby.touched" class="text-danger">
+          <div *ngIf="hobby.errors.required">Hobby is required</div>
+        </div>
+      </div>
+
+      <!-- select food  -->
+      <div class="form-group my-1">
+        <label for="food" class="text-white">Food</label>
+        <select
+          name="food"
+          [(ngModel)]="usersService.formData.Food"
+          class="form-control"
+          id="food"
+          required
+          #food="ngModel"
+          multiple
+        >
+          <option value="" disabled selected hidden>Select Food</option>
+          <option
+            *ngFor="let item of usersService.foods"
+            value="{{ item.FoodId }}"
+          >
+            {{ item.FoodName }}
+          </option>
+        </select>
+      </div>
+      <!-- validations -->
+      <div class="form-group">
+        <div *ngIf="food.invalid && food.touched" class="text-danger">
+          <div *ngIf="food.errors.required">Food is required</div>
+        </div>
+      </div>
+
+      <!-- submit  -->
+      <div class="form-group my-3">
+        <button
+          type="submit"
+          class="btn btn-primary form-control"
+          [disabled]="!(form.valid && form.dirty)"
+        >
+          SignUp
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

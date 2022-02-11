@@ -1,0 +1,204 @@
+<style>
+  .main {
+    background-color: #041114;
+    height: 100vh;
+  }
+  .logo {
+    width: 7rem;
+  }
+  input {
+    width: 100%;
+    height: 3rem;
+    border-radius: 0.5rem;
+    border: none;
+    background-color: #041114;
+    color: #fff;
+    font-size: 1.2rem;
+    padding: 0 1rem;
+  }
+  input:focus {
+    outline: none;
+    background-color: #041114;
+    color: #fff;
+  }
+</style>
+<!-- navbar -->
+<nav class="navbar navbar-expand-lg navbar-light" style="background: #041114">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"
+      ><img class="img-fluid img logo" src="../../assets/logo.png" alt=""
+    /></a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon bg-white"></span>
+    </button>
+    <div
+      class="collapse navbar-collapse justify-content-end"
+      id="navbarNavDropdown"
+    >
+      <ul class="navbar-nav">
+        <li>
+          <a class="nav-link active text-white" aria-current="page" href="#"
+            >Reports</a
+          >
+        </li>
+        &nbsp;
+        <li>
+          <a class="nav-link text-white btn btn-danger" 
+          (click)="logout()"
+          >Logout</a>
+        </li>
+        <li
+          class="nav-item dropdown active"
+          style="display: flex; margin: 0 1rem 0 1rem"
+        >
+          <a
+            class="nav-link dropdown-toggle active text-white"
+            
+            id="navbarDropdownMenuLink"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Admin
+          </a>
+          <ul
+            class="dropdown-menu bg-dark text-white"
+            aria-labelledby="navbarDropdownMenuLink"
+          >
+            <li>
+              <a class="dropdown-item text-white" href="#">Profile</a>
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                href="#"
+                style="
+                  background-color: #d11f5b;
+                  color: white;
+                  border-radius: 5px;
+                "
+                >Logout</a
+              >
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- end navbar -->
+<div
+  class="colorbar"
+  style="
+    height: 1rem;
+    background: linear-gradient(to right, rgb(209, 41, 83), rgb(255, 174, 0));
+    border-radius: 1.5rem;
+  "
+></div>
+<div class="main container">
+  <!-- contents  -->
+  <div class="form-control my-2 bg-dark">
+    <!-- search functionality -->
+    <input
+      class="form-control"
+      type="text"
+      placeholder="Search from the list"
+      [(ngModel)]="filter"
+    />
+    {{ filter }}
+  </div>
+  <div class="nav-2">
+    <ul style="display: flex; justify-content: center; list-style: none">
+      <li class="nav-item">
+        <a
+          href="#"
+          class="btn btn-primary nav-link text-light m-3"
+          routerLink="/employeeList"
+          >Approval List</a
+        >
+      </li>
+
+      <li class="nav-item">
+        <a
+          href="#"
+          class="btn btn-primary nav-link text-light m-3"
+          routerLink="/adduser"
+          >Add User</a
+        >
+      </li>
+      <li class="nav-item">
+        <!-- (click)="logout()" -->
+
+        <a
+          href="#"
+          class="btn btn-primary nav-link text-light m-3"
+          routerLink="/login"
+          >Logout
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <table class="table table-bordered table-striped table-dark p-5">
+    <thead>
+      <tr>
+        <td>ID</td>
+        <td>Name</td>
+        <td>Contact</td>
+        <td>Occupation</td>
+        <td>Movie Genre</td>
+        <td>Hobby</td>
+        <td>Food</td>
+        <td>Actions</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let user of usersService.users
+            | filter: filter
+            | paginate: { itemsPerPage: 6, currentPage: page }
+        "
+      >
+        <td>{{ user.UserId }}</td>
+        <td>{{ user.Name }}</td>
+        <td>{{ user.Phone }}</td>
+        <td>{{ user.Occupation }}</td>
+        <td>{{ user.MovieGenre }}</td>
+        <td>{{ user.Hobby }}</td>
+        <td>{{ user.Food }}</td>
+
+        <td>
+          <!-- button -->
+
+            
+            <button class="btn btn-sm btn-success" (click)="updateUser(user.UserId)" >
+            Edit
+          </button>
+
+          &nbsp;
+
+          <button
+            class="btn btn-sm btn-danger"
+            (click)="deleteUser(user.UserId)"
+          >
+            Delete
+          </button>
+        </td>
+        <!-- <td>{{ emp.Department }}</td> -->
+      </tr>
+    </tbody>
+  </table>
+  <div class="footer">
+    <!-- pagination  -->
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+  </div>
+</div>
